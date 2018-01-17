@@ -2,5 +2,6 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'sessions' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   post '/upload', to: 'image#create'
-  resources :images, only: [:create]
+  get '/images', to: 'image#index'
+  resources :image, only: [:index, :create]
 end

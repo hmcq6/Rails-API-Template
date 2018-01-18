@@ -5,3 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Type.create(name: 'JSK')
+Type.create(name: 'Hair Accessories')
+
+Feature.create(name: 'Lining')
+Feature.create(name: 'No Shirring')
+
+Tag.create(name: 'Stripes')
+Tag.create(name: 'Bows')
+
+Color.create(name: 'Black', hex: '#000000')
+Color.create(name: 'White', hex: '#FFFFFF')

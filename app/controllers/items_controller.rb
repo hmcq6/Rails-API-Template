@@ -13,15 +13,15 @@ class ItemsController < ApplicationController
 
   def create
     create_params = required_params
-    # create_params = create_params.merge(image_id: permitted_params[:id]) unless permitted_params[:id].nil?
+    create_params = create_params.merge(brand_id: permitted_params[:id]) unless permitted_params[:id].nil?
     item = Item.new(create_params)
     if item.save!
       render json: JSONAPI::Serializer.serialize(item)
     end
   end
 
-  def image
-    # render json: JSONAPI::Serializer.serialize(Item.find(params.require(:id)).image)
+  def brand
+    render json: JSONAPI::Serializer.serialize(Brand.find(params.require(:id)))
   end
 
   def required_params
@@ -31,6 +31,6 @@ class ItemsController < ApplicationController
   end
 
   def permitted_params
-    # params.require(:data).require(:relationships).require(:image).require(:data).permit(:id)
+    params.require(:data).require(:relationships).require(:brand).require(:data).permit(:id)
   end
 end

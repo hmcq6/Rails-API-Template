@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180118060827) do
+ActiveRecord::Schema.define(version: 20180118214539) do
+
+  create_table "add_brand_to_items", force: :cascade do |t|
+    t.integer "brand_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["brand_id"], name: "index_add_brand_to_items_on_brand_id"
+  end
 
   create_table "brands", force: :cascade do |t|
     t.text "name"

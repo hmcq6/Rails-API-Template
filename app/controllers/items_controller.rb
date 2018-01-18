@@ -13,7 +13,8 @@ class ItemsController < ApplicationController
 
   def create
     create_params = required_params
-    create_params = create_params.merge(brand_id: permitted_params[:id]) unless permitted_params[:id].nil?
+    create_params = create_params.merge(brand_params) unless brand_params[:brand_id].nil?
+    create_params = create_params.merge(type_params) unless type_params[:type_id].nil?
     item = Item.new(create_params)
     if item.save!
       render json: JSONAPI::Serializer.serialize(item)
@@ -24,13 +25,33 @@ class ItemsController < ApplicationController
     render json: JSONAPI::Serializer.serialize(Brand.find(params.require(:id)))
   end
 
+  def type
+    render json: JSONAPI::Serializer.serialize(Type.find(params.require(:id)))
+  end
+
   def required_params
     params.require(:data)
           .require(:attributes)
           .permit(:name, :alt_name, :year, :product_number, :length, :price, :waist, :notes)
   end
 
-  def permitted_params
-    params.require(:data).require(:relationships).require(:brand).require(:data).permit(:id)
+  def brand_params
+    {
+      brand_id: params.require(:data)
+            .require(:relationships)
+            .require(:brand)
+            .require(:data)
+            .permit(:id)[:id]
+    }
+  end
+
+  def type_params
+    {
+      type_id: params.require(:data)
+                    .require(:relationships)
+                    .require(:type)
+                    .require(:data)
+                    .permit(:id)[:id]
+    }
   end
 end

@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get 'brands/:id/image', to: 'brand#image'
   resources :image, path: :images, only: [:index, :show, :create]
   resources :brand, path: :brands, only: [:index, :show, :create]
+  resources :type, path: :types, only: [:index, :show, :create]
 end

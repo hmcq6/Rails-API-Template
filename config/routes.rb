@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :colors
   resources :tags
   resources :features
   devise_for :users, controllers: { sessions: 'sessions' }

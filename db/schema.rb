@@ -10,11 +10,90 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180116004028) do
+ActiveRecord::Schema.define(version: 20180118223753) do
+
+  create_table "add_brand_to_items", force: :cascade do |t|
+    t.integer "brand_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["brand_id"], name: "index_add_brand_to_items_on_brand_id"
+  end
+
+  create_table "add_colors_to_items", force: :cascade do |t|
+    t.integer "colors_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["colors_id"], name: "index_add_colors_to_items_on_colors_id"
+  end
+
+  create_table "add_type_to_items", force: :cascade do |t|
+    t.integer "type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type_id"], name: "index_add_type_to_items_on_type_id"
+  end
+
+  create_table "brands", force: :cascade do |t|
+    t.text "name"
+    t.text "nickname"
+    t.integer "image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["image_id"], name: "index_brands_on_image_id"
+  end
+
+  create_table "colors", force: :cascade do |t|
+    t.string "name"
+    t.string "hex"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "features", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "images", force: :cascade do |t|
     t.string "file_name"
     t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.string "alt_name"
+    t.integer "brand_id"
+    t.integer "type_id"
+    t.integer "year"
+    t.integer "product_number"
+    t.integer "colors_id"
+    t.integer "features_id"
+    t.string "bust"
+    t.string "length"
+    t.integer "price"
+    t.string "waist"
+    t.string "notes"
+    t.integer "tags_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["brand_id"], name: "index_items_on_brand_id"
+    t.index ["colors_id"], name: "index_items_on_colors_id"
+    t.index ["features_id"], name: "index_items_on_features_id"
+    t.index ["tags_id"], name: "index_items_on_tags_id"
+    t.index ["type_id"], name: "index_items_on_type_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "types", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

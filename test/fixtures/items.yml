@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  alt_name: MyString
+  brand: 
+  type: 
+  year: 1
+  product_number: 1
+  colors: 
+  features: 
+  bust: MyString
+  length: MyString
+  price: 1
+  waist: MyString
+  notes: MyString
+  tags: 
+
+two:
+  name: MyString
+  alt_name: MyString
+  brand: 
+  type: 
+  year: 1
+  product_number: 1
+  colors: 
+  features: 
+  bust: MyString
+  length: MyString
+  price: 1
+  waist: MyString
+  notes: MyString
+  tags: 

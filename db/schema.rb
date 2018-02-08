@@ -10,28 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180118223753) do
-
-  create_table "add_brand_to_items", force: :cascade do |t|
-    t.integer "brand_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["brand_id"], name: "index_add_brand_to_items_on_brand_id"
-  end
-
-  create_table "add_colors_to_items", force: :cascade do |t|
-    t.integer "colors_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["colors_id"], name: "index_add_colors_to_items_on_colors_id"
-  end
-
-  create_table "add_type_to_items", force: :cascade do |t|
-    t.integer "type_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["type_id"], name: "index_add_type_to_items_on_type_id"
-  end
+ActiveRecord::Schema.define(version: 20180208033533) do
 
   create_table "brands", force: :cascade do |t|
     t.text "name"
@@ -39,7 +18,9 @@ ActiveRecord::Schema.define(version: 20180118223753) do
     t.integer "image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "items_id"
     t.index ["image_id"], name: "index_brands_on_image_id"
+    t.index ["items_id"], name: "index_brands_on_items_id"
   end
 
   create_table "colors", force: :cascade do |t|
@@ -60,6 +41,8 @@ ActiveRecord::Schema.define(version: 20180118223753) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "item_id"
+    t.index ["item_id"], name: "index_images_on_item_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -79,9 +62,11 @@ ActiveRecord::Schema.define(version: 20180118223753) do
     t.integer "tags_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "images_id"
     t.index ["brand_id"], name: "index_items_on_brand_id"
     t.index ["colors_id"], name: "index_items_on_colors_id"
     t.index ["features_id"], name: "index_items_on_features_id"
+    t.index ["images_id"], name: "index_items_on_images_id"
     t.index ["tags_id"], name: "index_items_on_tags_id"
     t.index ["type_id"], name: "index_items_on_type_id"
   end

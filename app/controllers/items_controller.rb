@@ -14,10 +14,9 @@ class ItemsController < ApplicationController
   def create
     create_params = required_params
     create_params = create_params.merge(brand_params) unless brand_params[:brand_id].nil?
-    #create_params = create_params.merge(type_params) unless type_params[:type_id].nil?
+    create_params = create_params.merge(type_params) unless type_params[:type_id].nil?
     #create_params = create_params.merge(colors_params) unless colors_params[:color_ids].nil?
     create_params = create_params.merge(images_params) unless images_params[:image_ids].nil?
-    byebug
     item = Item.new(create_params)
     if item.save!
       render json: JSONAPI::Serializer.serialize(item)

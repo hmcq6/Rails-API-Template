@@ -4,6 +4,7 @@ class CreateBrands < ActiveRecord::Migration[5.1]
       t.text :name
       t.text :nickname
       t.references :image
+      t.references :items
 
       t.timestamps
     end

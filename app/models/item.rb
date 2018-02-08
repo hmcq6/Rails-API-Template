@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
   has_many :images
-  has_one :brand
+  belongs_to :brand
+  belongs_to :type
 end

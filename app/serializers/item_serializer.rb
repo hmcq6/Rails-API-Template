@@ -4,4 +4,6 @@ class ItemSerializer < ActiveModel::Serializer
   has_one :brand
   has_one :type
   has_many :colors
+  has_many :images
+  has_many :features
 end

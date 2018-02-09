@@ -78,9 +78,9 @@ class ItemsController < ApplicationController
   def images_params
     image_ids = params.require(:data)
                        .require(:relationships)
-                       .require(:images)
-                       .require(:data)
-    if image_ids.length
+                       .permit(:images)
+                       .permit(:data)
+    if image_ids.try(:length)
       image_ids = image_ids.map { |image| image.permit(:id)['id'] }
     else
       image_ids = []
@@ -91,11 +91,17 @@ class ItemsController < ApplicationController
   end
 
   def features_params
-    {
-      feature_ids: params.require(:data)
+    feature_ids = params.require(:data)
                        .require(:relationships)
-                       .require(:features)
-                       .require(:data).map { |feature| feature.permit(:id).values.first }
+                       .permit(:features)
+                       .permit(:data)
+    if feature_ids.try(:length)
+      feature_ids = feature_ids.map { |feature| feature.permit(:id)['id'] }
+    else
+      feature_ids = []
+    end
+    {
+      feature_ids: feature_ids
     }
   end
 

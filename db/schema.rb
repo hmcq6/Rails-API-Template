@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180208021412) do
+ActiveRecord::Schema.define(version: 20180209003351) do
 
   create_table "brands", force: :cascade do |t|
     t.text "name"
@@ -23,6 +23,11 @@ ActiveRecord::Schema.define(version: 20180208021412) do
     t.index ["items_id"], name: "index_brands_on_items_id"
   end
 
+  create_table "brands_images", id: false, force: :cascade do |t|
+    t.integer "brand_id", null: false
+    t.integer "image_id", null: false
+  end
+
   create_table "colors", force: :cascade do |t|
     t.string "name"
     t.string "hex"
@@ -32,8 +37,17 @@ ActiveRecord::Schema.define(version: 20180208021412) do
 
   create_table "features", force: :cascade do |t|
     t.string "name"
+    t.integer "items_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["items_id"], name: "index_features_on_items_id"
+  end
+
+  create_table "features_items", id: false, force: :cascade do |t|
+    t.integer "item_id", null: false
+    t.integer "feature_id", null: false
+    t.index ["feature_id", "item_id"], name: "index_features_items_on_feature_id_and_item_id"
+    t.index ["item_id", "feature_id"], name: "index_features_items_on_item_id_and_feature_id"
   end
 
   create_table "images", force: :cascade do |t|
@@ -42,6 +56,8 @@ ActiveRecord::Schema.define(version: 20180208021412) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "item_id"
+    t.integer "brand_id"
+    t.index ["brand_id"], name: "index_images_on_brand_id"
     t.index ["item_id"], name: "index_images_on_item_id"
   end
 
